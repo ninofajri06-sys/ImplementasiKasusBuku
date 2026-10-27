@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Kelola Stok Buku</title>
+</head>
+<body>
+    <h1>Kelola Stok Buku (Pustakawan)</h1>
+    
+    <table border="1">
+        <tr>
+            <th>ID</th>
+            <th>Judul</th>
+            <th>Stok Saat Ini</th>
+            <th>Aksi Tambah Stok</th>
+        </tr>
+        <tr th:each="buku : ${daftarBuku}">
+            <td th:text="${buku.id}"></td>
+            <td th:text="${buku.judul}"></td>
+            <td th:text="${buku.stok}"></td>
+            <td>
+                <!-- Form untuk update stok -->
+                <form th:action="@{/stok/update}" method="post">
+                    <input type="hidden" name="idBuku" th:value="${buku.id}" />
+                    <input type="number" name="tambahanStok" min="1" required />
+                    <button type="submit">Tambah</button>
+                </form>
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
